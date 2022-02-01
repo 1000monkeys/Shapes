@@ -47,18 +47,18 @@ class TrapeziumMenu(QWidget):
         self.backButton.clicked.connect(menu.goToMenu)
 
         layout = QGridLayout()
-        layout.addWidget(trapeziumPicture, 0, 0, 3, 3)
+        layout.addWidget(trapeziumPicture, 0, 0, 5, 5)
 
-        layout.addWidget(self.upsideLabel, 0, 4)
-        layout.addWidget(self.upsideInput, 0, 5)
+        layout.addWidget(self.upsideLabel, 0, 5)
+        layout.addWidget(self.upsideInput, 0, 6)
 
-        layout.addWidget(self.downsideLabel, 1, 4)
-        layout.addWidget(self.downsideInput, 1, 5)
+        layout.addWidget(self.downsideLabel, 1, 5)
+        layout.addWidget(self.downsideInput, 1, 6)
 
-        layout.addWidget(self.heightLabel, 2, 4)
-        layout.addWidget(self.heightInput, 2, 5)
+        layout.addWidget(self.heightLabel, 2, 5)
+        layout.addWidget(self.heightInput, 2, 6)
 
-        layout.addWidget(self.resultLabel, 3, 4, 2, 2)
+        layout.addWidget(self.resultLabel, 3, 5, 2, 2)
         layout.addWidget(self.backButton, 4, 5, 2, 2)
 
         return layout

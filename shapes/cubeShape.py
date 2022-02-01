@@ -1,12 +1,16 @@
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from shapes.isFloat import isFloat
+
 
 class CubeMenu(QWidget):
     def calculate(self):
-        if self.sizeInput.text().isnumeric():
-            self.resultLabel.setText(
-                "Inhoud: " + str(int(self.sizeInput.text()) * int(self.sizeInput.text()) * int(self.sizeInput.text())))
+        self.sizeInput.setText(self.sizeInput.text().replace(",", "."))
+
+        if isFloat(self.sizeInput.text()):
+            size = float(self.sizeInput.text())
+            self.resultLabel.setText("Inhoud: " + str(size * size * size))
         else:
             self.resultLabel.setText("Check input.")
 
@@ -25,7 +29,7 @@ class CubeMenu(QWidget):
         self.sizeInput = QLineEdit(self)
         self.sizeInput.textChanged.connect(self.calculate)
 
-        self.resultLabel = QLabel(self, text="Inhoud: ")
+        self.resultLabel = QLabel(self, text="Check input.")
 
         self.backButton = QPushButton(self, text="Terug")
         self.backButton.clicked.connect(menu.goToMenu)

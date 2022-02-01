@@ -1,26 +1,33 @@
+import math
+
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
 
-class KiteMenu(QWidget):
+class SphereMenu(QWidget):
     def calculate(self):
         if self.sizeInput.text().isnumeric():
-            self.resultLabel.setText("Oppervlakte: " + str(int(self.sizeInput.text()) * int(self.sizeInput.text())))
+            radius = int(self.sizeInput.text())
+
+            inhoud = (1 + 1/3) * math.pi * (radius * radius * radius)
+            oppervlakte = 4 * math.pi * (radius * radius * radius)
+
+            self.resultLabel.setText("Oppervlakte: " + str(oppervlakte) + "\nInhoud: " + str(inhoud))
         else:
             self.resultLabel.setText("Check input.")
 
     def getUI(self, menu):
-        menu.setWindowTitle("Kite Shape")
+        menu.setWindowTitle("Circle Shape")
         menu.setFixedWidth(500)
         menu.setFixedHeight(275)
 
-        kitePicture = QLabel(self)
-        kitePixMap = QPixmap('assets/kite.png')
-        kitePixMap = kitePixMap.scaled(250, 250)
-        kitePicture.setPixmap(kitePixMap)
-        kitePicture.show()
+        spherePicture = QLabel(self)
+        spherePixMap = QPixmap('assets/sphere.png')
+        spherePixMap = spherePixMap.scaled(250, 250)
+        spherePicture.setPixmap(spherePixMap)
+        spherePicture.show()
 
-        self.sizeLabel = QLabel(self, text="Width/Height: ")
+        self.sizeLabel = QLabel(self, text="Radius: ")
         self.sizeInput = QLineEdit(self)
         self.sizeInput.textChanged.connect(self.calculate)
 
@@ -29,8 +36,9 @@ class KiteMenu(QWidget):
         self.backButton = QPushButton(self, text="Terug")
         self.backButton.clicked.connect(menu.goToMenu)
 
+
         layout = QGridLayout()
-        layout.addWidget(kitePicture, 0, 0, 3, 3)
+        layout.addWidget(spherePicture, 0, 0, 3, 3)
 
         layout.addWidget(self.sizeLabel, 0, 3)
         layout.addWidget(self.sizeInput, 0, 4)

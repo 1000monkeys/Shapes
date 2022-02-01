@@ -24,7 +24,7 @@ class SquareMenu(QWidget):
         self.sizeInput = QLineEdit(self)
         self.sizeInput.textChanged.connect(self.calculate)
 
-        self.resultLabel = QLabel(self, text="Oppervlakte: \nOmtrek: ")
+        self.resultLabel = QLabel(self, text="Check input.")
 
         self.backButton = QPushButton(self, text="Terug")
         self.backButton.clicked.connect(menu.goToMenu)

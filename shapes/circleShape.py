@@ -3,16 +3,21 @@ import math
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from shapes.isFloat import isFloat
+
 
 class CircleMenu(QWidget):
     def calculate(self):
-        if self.sizeInput.text().isnumeric():
-            self.resultLabel.setText("Oppervlakte: " + str(
-                int(self.sizeInput.text()) * int(self.sizeInput.text()) * math.pi) + "\nOmtrek: " + str(
-                int(self.sizeInput.text()) * 2 * math.pi))
+        self.radiusInput.setText(self.radiusInput.text().replace(",", "."))
+
+        if isFloat(self.radiusInput.text()):
+            radius = float(self.radiusInput.text())
+
+            self.resultLabel.setText("Oppervlakte: " +
+                str(radius * radius * math.pi) + "\nOmtrek: " +
+                str(radius * 2 * math.pi))
         else:
             self.resultLabel.setText("Check input.")
-
 
     def getUI(self, menu):
         menu.setWindowTitle("Circle Shape")
@@ -25,11 +30,11 @@ class CircleMenu(QWidget):
         circlePicture.setPixmap(circlePixMap)
         circlePicture.show()
 
-        self.sizeLabel = QLabel(self, text="Radius: ")
-        self.sizeInput = QLineEdit(self)
-        self.sizeInput.textChanged.connect(self.calculate)
+        self.radiusLabel = QLabel(self, text="Radius: ")
+        self.radiusInput = QLineEdit(self)
+        self.radiusInput.textChanged.connect(self.calculate)
 
-        self.resultLabel = QLabel(self, text="Oppervlakte: \nOmtrek: ")
+        self.resultLabel = QLabel(self, text="Check input.")
 
         self.backButton = QPushButton(self, text="Terug")
         self.backButton.clicked.connect(menu.goToMenu)
@@ -38,8 +43,8 @@ class CircleMenu(QWidget):
         layout = QGridLayout()
         layout.addWidget(circlePicture, 0, 0, 3, 3)
 
-        layout.addWidget(self.sizeLabel, 0, 3)
-        layout.addWidget(self.sizeInput, 0, 4)
+        layout.addWidget(self.radiusLabel, 0, 3)
+        layout.addWidget(self.radiusInput, 0, 4)
         layout.addWidget(self.resultLabel, 1, 3, 1, 3)
         layout.addWidget(self.backButton, 2, 3, 1, 3)
 

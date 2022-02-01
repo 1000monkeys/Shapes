@@ -29,7 +29,7 @@ class PyramidMenu(QWidget):
         self.widthInput = QLineEdit(self)
         self.widthInput.textChanged.connect(self.calculate)
 
-        self.resultLabel = QLabel(self, text="Oppervlakte: \nOmtrek: ")
+        self.resultLabel = QLabel(self, text="Check input.")
 
         self.backButton = QPushButton(self, text="Terug")
         self.backButton.clicked.connect(menu.goToMenu)

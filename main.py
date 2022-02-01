@@ -7,11 +7,14 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QGridLayout, QWidget, QPu
 
 from shapes.cilinderShape import CilinderMenu
 from shapes.circleShape import CircleMenu
+from shapes.coneShape import ConeMenu
 from shapes.cubeShape import CubeMenu
+from shapes.ellipseShape import EllipseMenu
 from shapes.kiteShape import KiteMenu
 from shapes.parellogramShape import ParellogramMenu
 from shapes.prismaTriangleShape import PrismaTriangleMenu
 from shapes.pyramidShape import PyramidMenu
+from shapes.sphereShape import SphereMenu
 from shapes.squareShape import SquareMenu
 from shapes.squareTriangleShape import SquareTriangleMenu
 from shapes.trapeziumShape import TrapeziumMenu
@@ -42,7 +45,6 @@ class Menu(QMainWindow):
         self.setCentralWidget(self.central)
         self.layout = self.mainMenuUI()
         self.central.setLayout(self.layout)
-
 
     def mainMenuUI(self):
         squareButton = QPushButton()
@@ -105,10 +107,10 @@ class Menu(QMainWindow):
         coneButton.setIcon(QIcon('assets/cone.png'))
         coneButton.setIconSize(QSize(100, 100))
 
-        bulbButton = QPushButton()
-        bulbButton.clicked.connect(self.bulbClick)
-        bulbButton.setIcon(QIcon('assets/bulb.png'))
-        bulbButton.setIconSize(QSize(100, 100))
+        sphereButton = QPushButton()
+        sphereButton.clicked.connect(self.sphereClick)
+        sphereButton.setIcon(QIcon('assets/sphere.png'))
+        sphereButton.setIconSize(QSize(100, 100))
 
         ellipseButton = QPushButton()
         ellipseButton.clicked.connect(self.ellipseClick)
@@ -133,107 +135,60 @@ class Menu(QMainWindow):
         layout.addWidget(prismaTriangleButton, 2, 2)
         layout.addWidget(coneButton, 2, 3)
 
-        layout.addWidget(bulbButton, 3, 1)
+        layout.addWidget(sphereButton, 3, 1)
         layout.addWidget(ellipseButton, 3, 2)
 
         return layout
 
-    def squareClick(self, event):
+    def changeScreenToShapeMenu(self, shapeMenu):
         deleteItemsOfLayout(self.layout)
         self.central = QWidget()
         self.setCentralWidget(self.central)
-        self.shapeMenu = SquareMenu()
+        self.shapeMenu = shapeMenu
         self.layout = self.shapeMenu.getUI(self)
         self.central.setLayout(self.layout)
+
+    def squareClick(self, event):
+        self.changeScreenToShapeMenu(shapeMenu=SquareMenu())
 
     def circleClick(self, event):
-        deleteItemsOfLayout(self.layout)
-        self.central = QWidget()
-        self.setCentralWidget(self.central)
-        self.shapeMenu = CircleMenu()
-        self.layout = self.shapeMenu.getUI(self)
-        self.central.setLayout(self.layout)
+        self.changeScreenToShapeMenu(shapeMenu=CircleMenu())
 
     def triangleClick(self, event):
-        deleteItemsOfLayout(self.layout)
-        self.central = QWidget()
-        self.setCentralWidget(self.central)
-        self.shapeMenu = TriangleMenu()
-        self.layout = self.shapeMenu.getUI(self)
-        self.central.setLayout(self.layout)
+        self.changeScreenToShapeMenu(shapeMenu=TriangleMenu())
 
     def squareTriangleClick(self, event):
-        deleteItemsOfLayout(self.layout)
-        self.central = QWidget()
-        self.setCentralWidget(self.central)
-        self.shapeMenu = SquareTriangleMenu()
-        self.layout = self.shapeMenu.getUI(self)
-        self.central.setLayout(self.layout)
+        self.changeScreenToShapeMenu(shapeMenu=SquareTriangleMenu())
 
     def kiteClick(self, event):
-        deleteItemsOfLayout(self.layout)
-        self.central = QWidget()
-        self.setCentralWidget(self.central)
-        self.shapeMenu = KiteMenu()
-        self.layout = self.shapeMenu.getUI(self)
-        self.central.setLayout(self.layout)
+        self.changeScreenToShapeMenu(shapeMenu=KiteMenu())
 
     def cubeClick(self, event):
-        deleteItemsOfLayout(self.layout)
-        self.central = QWidget()
-        self.setCentralWidget(self.central)
-        self.shapeMenu = CubeMenu()
-        self.layout = self.shapeMenu.getUI(self)
-        self.central.setLayout(self.layout)
+        self.changeScreenToShapeMenu(shapeMenu=CubeMenu())
 
     def cilinderClick(self, event):
-        deleteItemsOfLayout(self.layout)
-        self.central = QWidget()
-        self.setCentralWidget(self.central)
-        self.shapeMenu = CilinderMenu()
-        self.layout = self.shapeMenu.getUI(self)
-        self.central.setLayout(self.layout)
+        self.changeScreenToShapeMenu(shapeMenu=CilinderMenu())
 
     def pyramidClick(self, event):
-        deleteItemsOfLayout(self.layout)
-        self.central = QWidget()
-        self.setCentralWidget(self.central)
-        self.shapeMenu = PyramidMenu()
-        self.layout = self.shapeMenu.getUI(self)
-        self.central.setLayout(self.layout)
+        self.changeScreenToShapeMenu(shapeMenu=PyramidMenu())
 
     def parellogramClick(self, event):
-        deleteItemsOfLayout(self.layout)
-        self.central = QWidget()
-        self.setCentralWidget(self.central)
-        self.shapeMenu = ParellogramMenu()
-        self.layout = self.shapeMenu.getUI(self)
-        self.central.setLayout(self.layout)
+        self.changeScreenToShapeMenu(shapeMenu=ParellogramMenu())
 
     def trapeziumClick(self, event):
-        deleteItemsOfLayout(self.layout)
-        self.central = QWidget()
-        self.setCentralWidget(self.central)
-        self.shapeMenu = TrapeziumMenu()
-        self.layout = self.shapeMenu.getUI(self)
-        self.central.setLayout(self.layout)
+        self.changeScreenToShapeMenu(shapeMenu=TrapeziumMenu())
 
     def prismaTriangleClick(self, event):
-        deleteItemsOfLayout(self.layout)
-        self.central = QWidget()
-        self.setCentralWidget(self.central)
-        self.shapeMenu = PrismaTriangleMenu()
-        self.layout = self.shapeMenu.getUI(self)
-        self.central.setLayout(self.layout)
+        self.changeScreenToShapeMenu(shapeMenu=PrismaTriangleMenu())
 
     def coneClick(self, event):
-        print("PRESSED")
+        self.changeScreenToShapeMenu(shapeMenu=ConeMenu())
 
-    def bulbClick(self, event):
-        print("PRESSED")
+    def sphereClick(self, event):
+        self.changeScreenToShapeMenu(shapeMenu=SphereMenu())
 
     def ellipseClick(self, event):
-        print("PRESSED")
+        self.changeScreenToShapeMenu(shapeMenu=EllipseMenu())
 
 
 def deleteItemsOfLayout(layout):

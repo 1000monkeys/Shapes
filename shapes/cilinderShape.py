@@ -3,11 +3,19 @@ import math
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from shapes.isFloat import isFloat
+
 
 class CilinderMenu(QWidget):
     def calculate(self):
-        if self.sizeInput.text().isnumeric() and self.radiusInput.text().isnumeric():
-            self.resultLabel.setText("Inhoud: " + str(int(self.radiusInput.text()) * math.pi * int(self.sizeInput.text())))
+        self.heightInput.setText(self.heightInput.text().replace(",", "."))
+        self.radiusInput.setText(self.radiusInput.text().replace(",", "."))
+
+        if isFloat(self.heightInput.text()) and isFloat(self.radiusInput.text()):
+            height = float(self.heightInput.text())
+            radius = float(self.radiusInput.text())
+
+            self.resultLabel.setText("Inhoud: " + str(radius * math.pi * height))
         else:
             self.resultLabel.setText("Check input.")
 
@@ -22,15 +30,15 @@ class CilinderMenu(QWidget):
         cilinderPicture.setPixmap(cilinderPixMap)
         cilinderPicture.show()
 
-        self.sizeLabel = QLabel(self, text="Height: ")
-        self.sizeInput = QLineEdit(self)
-        self.sizeInput.textChanged.connect(self.calculate)
+        self.heightLabel = QLabel(self, text="Height: ")
+        self.heightInput = QLineEdit(self)
+        self.heightInput.textChanged.connect(self.calculate)
 
         self.radiusLabel = QLabel(self, text="Radius: ")
         self.radiusInput = QLineEdit(self)
         self.radiusInput.textChanged.connect(self.calculate)
 
-        self.resultLabel = QLabel(self, text="Inhoud: ")
+        self.resultLabel = QLabel(self, text="Check input.")
 
         self.backButton = QPushButton(self, text="Terug")
         self.backButton.clicked.connect(menu.goToMenu)
@@ -38,8 +46,8 @@ class CilinderMenu(QWidget):
         layout = QGridLayout()
         layout.addWidget(cilinderPicture, 0, 0, 4, 4)
 
-        layout.addWidget(self.sizeLabel, 0, 4)
-        layout.addWidget(self.sizeInput, 0, 5)
+        layout.addWidget(self.heightLabel, 0, 4)
+        layout.addWidget(self.heightInput, 0, 5)
         layout.addWidget(self.radiusLabel, 1, 4)
         layout.addWidget(self.radiusInput, 1, 5)
         layout.addWidget(self.resultLabel, 2, 4, 1, 2)
