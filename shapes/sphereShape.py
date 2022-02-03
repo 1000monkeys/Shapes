@@ -3,11 +3,15 @@ import math
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from shapes.isFloat import isFloat
+
 
 class SphereMenu(QWidget):
     def calculate(self):
-        if self.sizeInput.text().isnumeric():
-            radius = int(self.sizeInput.text())
+        self.sizeInput.setText(self.sizeInput.text().replace(",", "."))
+
+        if isFloat(self.sizeInput.text()):
+            radius = float(self.sizeInput.text())
 
             inhoud = (1 + 1/3) * math.pi * (radius * radius * radius)
             oppervlakte = 4 * math.pi * (radius * radius * radius)

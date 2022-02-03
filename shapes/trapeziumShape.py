@@ -3,13 +3,19 @@ import math
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from shapes.isFloat import isFloat
+
 
 class TrapeziumMenu(QWidget):
     def calculate(self):
-        if self.upsideInput.text().isnumeric() and self.downsideInput.text().isnumeric() and self.heightInput.text().isnumeric():
-            upside = int(self.upsideInput.text())
-            downside = int(self.downsideInput.text())
-            height = int(self.heightInput.text())
+        self.upsideInput.setText(self.upsideInput.text().replace(",", "."))
+        self.downsideInput.setText(self.downsideInput.text().replace(",", "."))
+        self.heightInput.setText(self.heightInput.text().replace(",", "."))
+
+        if isFloat(self.upsideInput.text()) and isFloat(self.downsideInput.text()) and isFloat(self.heightInput.text()):
+            upside = float(self.upsideInput.text())
+            downside = float(self.downsideInput.text())
+            height = float(self.heightInput.text())
 
             leftSide = math.sqrt(((downside - upside)/2) * ((downside - upside)/2) + height * height)
             rightSide = math.sqrt(((downside - upside)/2) * ((downside - upside)/2) + height * height)

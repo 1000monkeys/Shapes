@@ -1,21 +1,26 @@
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from shapes.isFloat import isFloat
+
 
 class PrismaTriangleMenu(QWidget):
     def calculate(self):
-        if self.widthInput.text().isnumeric() and self.heightInput.text().isnumeric():
-            oppervlakteSmall = int(self.widthInput.text()) * int(self.widthInput.text())
-            oppervlakteLarge = oppervlakteSmall / 2 * int(self.heightInput.text())
+        self.widthInput.setText(self.widthInput.text().replace(",", "."))
+        self.heightInput.setText(self.heightInput.text().replace(",", "."))
 
-            length = int(self.heightInput.text())
+        if isFloat(self.widthInput.text()) and isFloat(self.heightInput.text()):
+            oppervlakteSmall = float(self.widthInput.text()) * float(self.widthInput.text())
+            oppervlakteLarge = oppervlakteSmall / 2 * float(self.heightInput.text())
+
+            length = float(self.heightInput.text())
 
             self.resultLabel.setText("Oppervlakte: " + str(oppervlakteLarge) +"\nInhoud: " + str(oppervlakteSmall * length))
         else:
             self.resultLabel.setText("Check input.")
 
     def getUI(self, menu):
-        menu.setWindowTitle("Triangle Shape")
+        menu.setWindowTitle("Prisma Triangle Shape")
         menu.setFixedWidth(500)
         menu.setFixedHeight(275)
 
@@ -25,7 +30,7 @@ class PrismaTriangleMenu(QWidget):
         prismaTrianglePicture.setPixmap(prismaTrianglePixMap)
         prismaTrianglePicture.show()
 
-        self.widthLabel = QLabel(self, text="Width/Height: ")
+        self.widthLabel = QLabel(self, text="Width: ")
         self.widthInput = QLineEdit(self)
         self.widthInput.textChanged.connect(self.calculate)
 

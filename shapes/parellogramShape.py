@@ -1,11 +1,16 @@
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from shapes.isFloat import isFloat
+
 
 class ParellogramMenu(QWidget):
     def calculate(self):
-        if self.sideInput.text().isnumeric() and self.heightInput.text().isnumeric():
-            self.resultLabel.setText("Oppervlakte: " + str(int(self.sideInput.text()) * int(self.heightInput.text())))
+        self.sideInput.setText(self.sideInput.text().replace(",", "."))
+        self.heightInput.setText(self.heightInput.text().replace(",", "."))
+
+        if isFloat(self.sideInput.text()) and isFloat(self.heightInput.text()):
+            self.resultLabel.setText("Oppervlakte: " + str(float(self.sideInput.text()) * float(self.heightInput.text())))
         else:
             self.resultLabel.setText("Check input.")
 

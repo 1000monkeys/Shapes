@@ -4,8 +4,10 @@ from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
 class TriangleMenu(QWidget):
     def calculate(self):
+        self.sizeInput.setText(self.sizeInput.text().replace(",", "."))
+
         if self.sizeInput.text().isnumeric():
-            self.resultLabel.setText("Oppervlakte: " + str(int(self.sizeInput.text()) * int(self.sizeInput.text()) / 2))
+            self.resultLabel.setText("Oppervlakte: " + str(float(self.sizeInput.text()) * float(self.sizeInput.text()) / 2))
         else:
             self.resultLabel.setText("Check input.")
 

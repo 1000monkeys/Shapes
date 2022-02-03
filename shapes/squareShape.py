@@ -1,11 +1,15 @@
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from shapes.isFloat import isFloat
+
 
 class SquareMenu(QWidget):
     def calculate(self):
-        if self.sizeInput.text().isnumeric():
-            self.resultLabel.setText("Oppervlakte: " + str(int(self.sizeInput.text()) * int(self.sizeInput.text())))
+        self.sizeInput.setText(self.sizeInput.text().replace(",", "."))
+
+        if isFloat(self.sizeInput.text()):
+            self.resultLabel.setText("Oppervlakte: " + str(float(self.sizeInput.text()) * float(self.sizeInput.text())))
         else:
             self.resultLabel.setText("Check input.")
 

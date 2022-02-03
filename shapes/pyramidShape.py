@@ -1,12 +1,17 @@
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from shapes.isFloat import isFloat
+
 
 class PyramidMenu(QWidget):
     def calculate(self):
-        if self.heightInput.text().isnumeric() and self.widthInput.text().isnumeric():
+        self.widthInput.setText(self.widthInput.text().replace(",", "."))
+        self.heightInput.setText(self.heightInput.text().replace(",", "."))
+
+        if isFloat(self.heightInput.text()) and isFloat(self.widthInput.text()):
             self.resultLabel.setText(
-                "Inhoud: " + str(int(self.heightInput.text()) * int(self.widthInput.text()) / 2))
+                "Inhoud: " + str(float(self.heightInput.text()) * float(self.widthInput.text()) / 2))
         else:
             self.resultLabel.setText("Check input.")
 
