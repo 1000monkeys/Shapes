@@ -1,8 +1,11 @@
 import math
 
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap, QPainter
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from PaintWidgets.SquareTrianglePaintWidget import SquareTrianglePaintWidget
+from templatePaintWidget import PaintWidget
 from shapes.isFloat import isFloat
 
 
@@ -21,7 +24,6 @@ class SquareTriangleMenu(QWidget):
             self.cInput.setText(str(float(self.cInput.text())))
 
     def calculate(self):
-
         if len(self.aInput.text()) > 0 and len(self.bInput.text()) > 0 and len(self.cInput.text()) > 0:
             self.resultLabel.setText("A, B and C are filled in, please leave one empty.")
         else:
@@ -55,11 +57,24 @@ class SquareTriangleMenu(QWidget):
             else:
                 self.resultLabel.setText("Check input.")
 
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.begin(self)
+        painter.setPen(Qt.black)
+
+        print("CALLED")
+
+        painter.drawLine(0, 0, 1000, 1000)
+        painter.drawLine(100, 100, 0, 0)
+        painter.end(self)
+
     def getUI(self, menu):
         menu.setWindowTitle("Square Triangle Shape")
         menu.setFixedWidth(500)
         menu.setFixedHeight(275)
 
+        menu.show()
+        """
         squareTrianglePicture = QLabel(self)
         squareTrianglePixMap = QPixmap('assets/squareTriangle.png')
         squareTrianglePixMap = squareTrianglePixMap.scaled(215, 215)
@@ -99,4 +114,9 @@ class SquareTriangleMenu(QWidget):
         layout.addWidget(self.resultLabel, 3, 5, 1, 2)
         layout.addWidget(self.calculateButton, 4, 5, 1, 2)
         layout.addWidget(self.backButton, 5, 5, 1, 2)
+        return layout
+        """
+        layout = QGridLayout()
+        layout.addWidget(SquareTrianglePaintWidget())
+
         return layout
