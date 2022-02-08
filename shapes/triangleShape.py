@@ -1,5 +1,7 @@
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
+from PyQt5.QtCore import Qt, QRect, QSize
+from PyQt5.QtWidgets import QLineEdit, QLabel, QGridLayout, QWidget, QHBoxLayout, QVBoxLayout
+
+from PaintWidgets.TrianglePaintWidget import TrianglePaintWidget
 
 
 class TriangleMenu(QWidget):
@@ -12,10 +14,12 @@ class TriangleMenu(QWidget):
             self.resultLabel.setText("Check input.")
 
     def getUI(self, menu):
-        menu.setWindowTitle("Triangle Shape")
-        menu.setFixedWidth(500)
-        menu.setFixedHeight(275)
+        self.menu = menu
+        self.menu.setWindowTitle("Triangle Shape")
+        #self.menu.setFixedWidth(500)
+        #self.menu.setFixedHeight(275)
 
+        """
         trianglePicture = QLabel(self)
         trianglePixMap = QPixmap('assets/triangle.png')
         trianglePixMap = trianglePixMap.scaled(250, 250)
@@ -38,5 +42,35 @@ class TriangleMenu(QWidget):
         layout.addWidget(self.sizeInput, 0, 4)
         layout.addWidget(self.resultLabel, 1, 3, 1, 3)
         layout.addWidget(self.backButton, 2, 3, 1, 3)
+        """
+        self.sizeLabel = QLabel(self, text="Height: ")
+        self.sizeLabel.setFixedWidth(50)
 
-        return layout
+        self.sizeInput = QLineEdit(self)
+        self.sizeInput.setFixedWidth(100)
+        self.sizeInput.textChanged.connect(self.calculate)
+
+        self.sizeHBoxLayout = QHBoxLayout()
+        self.sizeHBoxLayout.addWidget(self.sizeLabel)
+        self.sizeHBoxLayout.addWidget(self.sizeInput)
+
+        self.heightLabel = QLabel(self, text="Height: ")
+        self.heightLabel.setFixedWidth(50)
+
+        self.heightInput = QLineEdit(self)
+        self.heightInput.setFixedWidth(100)
+        self.heightInput.textChanged.connect(self.calculate)
+
+        self.heightHBoxLayout = QHBoxLayout()
+        self.heightHBoxLayout.addWidget(self.heightLabel)
+        self.heightHBoxLayout.addWidget(self.heightInput)
+
+        self.vBoxLayout = QVBoxLayout()
+        self.vBoxLayout.addLayout(self.sizeHBoxLayout)
+        self.vBoxLayout.addLayout(self.heightHBoxLayout)
+
+        self.hBoxLayout = QHBoxLayout()
+        self.hBoxLayout.addWidget(TrianglePaintWidget(self))
+        self.hBoxLayout.addLayout(self.vBoxLayout)
+
+        return self.hBoxLayout

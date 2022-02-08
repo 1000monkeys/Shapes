@@ -3,6 +3,7 @@ import math
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
+from PaintWidgets.TrapeziumPaintWidget import TrapeziumPaintWidget
 from shapes.isFloat import isFloat
 
 
@@ -17,10 +18,11 @@ class TrapeziumMenu(QWidget):
             downside = float(self.downsideInput.text())
             height = float(self.heightInput.text())
 
-            leftSide = math.sqrt(((downside - upside)/2) * ((downside - upside)/2) + height * height)
-            rightSide = math.sqrt(((downside - upside)/2) * ((downside - upside)/2) + height * height)
+            leftSide = math.sqrt(((downside - upside) / 2) * ((downside - upside) / 2) + height * height)
+            rightSide = math.sqrt(((downside - upside) / 2) * ((downside - upside) / 2) + height * height)
 
-            self.resultLabel.setText("Oppervlakte: " + str(0.5 * (upside + downside) * height) + "\nOmtrek: " + str(upside + downside + leftSide + rightSide))
+            self.resultLabel.setText("Oppervlakte: " + str(0.5 * (upside + downside) * height) + "\nOmtrek: " + str(
+                upside + downside + leftSide + rightSide))
         else:
             self.resultLabel.setText("Check input.")
 
@@ -29,6 +31,7 @@ class TrapeziumMenu(QWidget):
         menu.setFixedWidth(500)
         menu.setFixedHeight(275)
 
+        """
         trapeziumPicture = QLabel(self)
         trapeziumPixMap = QPixmap('assets/trapezium.png')
         trapeziumPixMap = trapeziumPixMap.scaled(250, 250)
@@ -66,5 +69,9 @@ class TrapeziumMenu(QWidget):
 
         layout.addWidget(self.resultLabel, 3, 5, 2, 2)
         layout.addWidget(self.backButton, 4, 5, 2, 2)
+        """
+
+        layout = QGridLayout()
+        layout.addWidget(TrapeziumPaintWidget())
 
         return layout

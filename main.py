@@ -37,8 +37,8 @@ class Menu(QMainWindow):
     def goToMenu(self):
         self.setWindowTitle("Shapes By Kjell Vos")
 
-        self.setFixedWidth(600)
-        self.setFixedHeight(600)
+        #self.setFixedWidth(600)
+        #self.setFixedHeight(600)
 
         deleteItemsOfLayout(self.layout)
         self.central = QWidget()
