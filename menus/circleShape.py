@@ -3,7 +3,7 @@ import math
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
-from shapes.isFloat import isFloat
+from menus.stringFormat import isFloat
 
 
 class CircleMenu(QWidget):

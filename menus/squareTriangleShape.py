@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
 from PaintWidgets.SquareTrianglePaintWidget import SquareTrianglePaintWidget
 from templatePaintWidget import PaintWidget
-from shapes.isFloat import isFloat
+from menus.stringFormat import isFloat
 
 
 class SquareTriangleMenu(QWidget):

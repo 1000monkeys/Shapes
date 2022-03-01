@@ -4,7 +4,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QGridLayout, QWidget
 
 from PaintWidgets.TrapeziumPaintWidget import TrapeziumPaintWidget
-from shapes.isFloat import isFloat
+from menus.stringFormat import isFloat
 
 
 class TrapeziumMenu(QWidget):

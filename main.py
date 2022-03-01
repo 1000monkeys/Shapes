@@ -5,20 +5,21 @@ from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGridLayout, QWidget, QPushButton, QLabel, QVBoxLayout
 
-from shapes.cilinderShape import CilinderMenu
-from shapes.circleShape import CircleMenu
-from shapes.coneShape import ConeMenu
-from shapes.cubeShape import CubeMenu
-from shapes.ellipseShape import EllipseMenu
-from shapes.kiteShape import KiteMenu
-from shapes.parellogramShape import ParellogramMenu
-from shapes.prismaTriangleShape import PrismaTriangleMenu
-from shapes.pyramidShape import PyramidMenu
-from shapes.sphereShape import SphereMenu
-from shapes.squareShape import SquareMenu
-from shapes.squareTriangleShape import SquareTriangleMenu
-from shapes.trapeziumShape import TrapeziumMenu
-from shapes.triangleShape import TriangleMenu
+from PaintWidgets.TrianglePaintWidget import TrianglePaintWidget
+from menus.cilinderShape import CilinderMenu
+from menus.circleShape import CircleMenu
+from menus.coneShape import ConeMenu
+from menus.cubeShape import CubeMenu
+from menus.ellipseShape import EllipseMenu
+from menus.kiteShape import KiteMenu
+from menus.parellogramShape import ParellogramMenu
+from menus.prismaTriangleShape import PrismaTriangleMenu
+from menus.pyramidShape import PyramidMenu
+from menus.sphereShape import SphereMenu
+from menus.squareShape import SquareMenu
+from menus.squareTriangleShape import SquareTriangleMenu
+from menus.trapeziumShape import TrapeziumMenu
+from menus.triangleShape import TriangleMenu
 
 
 class Menu(QMainWindow):
@@ -30,6 +31,8 @@ class Menu(QMainWindow):
         #self.setFixedHeight(600)
 
         self.central = QWidget()
+        self.central.setContentsMargins(10, 10, 10, 10)
+
         self.setCentralWidget(self.central)
         self.layout = self.mainMenuUI()
         self.central.setLayout(self.layout)
@@ -244,7 +247,7 @@ class Menu(QMainWindow):
         ellipseVBox.addWidget(ellipseButton)
         ellipseVBox.addWidget(ellipseLabel)
 
-        """Main layout containing all shapes their buttons and labels inside their resprective VBoxLayout"""
+        """Main layout containing all menus their buttons and labels inside their resprective VBoxLayout"""
         layout = QGridLayout()
         layout.setHorizontalSpacing(10)
         layout.setVerticalSpacing(15)
