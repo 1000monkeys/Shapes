@@ -31,12 +31,15 @@ class TrianglePaintWidget(QWidget):
         self.fontMetrics = QFontMetrics(self.font)
 
     def getSize(self):
+        '''
         appWidth = self.parentLayout.menu.central.frameGeometry().width()
         appHeight = self.parentLayout.menu.central.frameGeometry().height()
 
         rightVboxWidth = self.parentLayout.vBoxLayout.sizeHint().width()
 
         return QSize(appWidth - rightVboxWidth, appHeight)
+        '''
+        return QSize(250, 250)
 
     def sizeHint(self) -> QSize:
         return self.getSize()
@@ -56,7 +59,9 @@ class TrianglePaintWidget(QWidget):
 
         print("1")
 
-        self.triangle = Triangle((5, 4, 3), (90, 45, 45))
+        #self.triangle = Triangle((5, 4, 3), (90, 45, 45))
+        #self.triangle = Triangle((1, 1, 1), (60, 60, 60))
+        self.triangle = Triangle((2.85, 4.52, 3.52), (90, 51, 39))
 
         if self.triangle.edges[0] > self.triangle.edges[1] and self.triangle.edges[0] > self.triangle.edges[2]:
             self.scale = 200.0 / self.triangle.edges[0]
@@ -93,22 +98,22 @@ class TrianglePaintWidget(QWidget):
 
         painter.setPen(self.defaultPen)
         angle = 0
-        xa = float(self.triangle.edges[1] * math.cos(math.radians(angle))) * self.scale
-        ya = float(self.triangle.edges[1] * math.sin(math.radians(angle))) * self.scale
-        print("XA:" + str(25 + xa) + " & YA:" + str(25 + ya))
-        painter.drawLine(25, 25, 25 + xa, 25 + ya)
+        xa = float(self.triangle.edges[0] * math.cos(math.radians(angle))) * self.scale
+        ya = float(self.triangle.edges[0] * math.sin(math.radians(angle))) * self.scale
+        print("XA:" + str(xa) + " & YA:" + str(ya))
+        painter.drawLine(0, 0, xa, ya)
 
         angle = self.triangle.angles[0]
-        xb = float(self.triangle.edges[0] * math.cos(math.radians(angle))) * self.scale
-        yb = float(self.triangle.edges[0] * math.sin(math.radians(angle))) * self.scale
-        print("XB:" + str(25 + xb) + " & YB:" + str(25 + yb))
-        painter.drawLine(25 + xa, 25 + ya, 25 + xb, 25 + yb)
+        xb = float(self.triangle.edges[2] * math.cos(math.radians(angle))) * self.scale
+        yb = float(self.triangle.edges[2] * math.sin(math.radians(angle))) * self.scale
+        print("XB:" + str(xb) + " & YB:" + str(yb))
+        painter.drawLine(xa, ya, xb, yb)
 
-        angle = 90 - self.triangle.angles[0] - self.triangle.angles[1] - self.triangle.angles[2]
-        xc = float(self.triangle.edges[0] * math.cos(math.radians(angle))) * self.scale
-        yc = float(self.triangle.edges[0] * math.sin(math.radians(angle))) * self.scale
-        print("XC:" + str(25 + xc) + " & YC:" + str(25 + yc))
-        painter.drawLine(25 + xb, 25 + yb, 25 + xc, 25 + yc + yb)
+        angle = 360 - self.triangle.angles[1] - self.triangle.angles[2]
+        xc = float(self.triangle.edges[1] * math.cos(math.radians(angle))) * self.scale
+        yc = float(self.triangle.edges[1] * math.sin(math.radians(angle))) * self.scale
+        print("XC:" + str(xc + xb) + " & YC:" + str(yc + yb))
+        painter.drawLine(xb, yb, xc + xb, yc + yb)
 
 
 

@@ -30,12 +30,13 @@ class Menu(QMainWindow):
         #self.setFixedWidth(600)
         #self.setFixedHeight(600)
 
-        self.central = QWidget()
-        self.central.setContentsMargins(10, 10, 10, 10)
+        #self.central = QWidget()
+        self.central = TrianglePaintWidget(None)
+        #self.central.setContentsMargins(10, 10, 10, 10)
 
         self.setCentralWidget(self.central)
-        self.layout = self.mainMenuUI()
-        self.central.setLayout(self.layout)
+        #self.layout = self.mainMenuUI()
+        #self.central.setLayout(self.layout)
 
     def goToMenu(self):
         self.setWindowTitle("Shapes By Kjell Vos")
